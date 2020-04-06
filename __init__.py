@@ -8,12 +8,15 @@ from users_resources import UserResource, UsersListResource
 from data.users import User, LoginForm, RegisterForm, Jobs, JobForm, Departments, DepartmentForm
 import os
 
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 app.config['PERMANENT_SESSION_LIFETIME'] = datetime.timedelta(days=365)
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+
+def getApp():
+    return app
 
 
 def main():
