@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+  table {
+    width: 70%;
+    border-collapse: collapse;
+  }
+  td, th {
+    border: 1px solid #C2C2FF;
+    padding: 3px 7px 2px 7px;
+  }
+  th {
+    text-align: left;
+    padding: 5px;
+    background-color: #9999FF;
+    color: #fff;
+  }
+  tr:hover { background-color: #E0E0FF; }
+</style>
+<h1 align="center">List of Departments</h1>
+<a class="btn btn-primary " href="/department/add">Add a Department</a>
+<a class="btn btn-primary " href="/">Back to Jobs</a>
+{% for item in deps%}
+    <h1>Department # {{ loop.index }}</h1>
+    <table>
+    <thead><tr><th>Title of department</th><th>Chief</th><th>Members</th><th>Department email</th></tr></thead>
+    <tbody>
+    <tr><td>{{ item.title }}</td><td>{{ item.chief.name }}</td><td>{{ item.members }}</td><td>{{ item.email }}</td></tr>
+    </tbody>
+    </table>
+    {% if current_user.is_authenticated %}
+        <div>
+            <a href="/jobs/{{ item.id }}" class="btn btn-warning">Edit department</a>
+            <a href="/jobs/{{ item.id }}/remove" class="btn btn-danger">Remove department</a>
+        </div>
+    {% endif %}
+{% endfor %}
+{% endblock %}

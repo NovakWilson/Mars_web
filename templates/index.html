@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+  table {
+    width: 70%;
+    border-collapse: collapse;
+  }
+  td, th {
+    border: 1px solid #C2C2FF;
+    padding: 3px 7px 2px 7px;
+  }
+  th {
+    text-align: left;
+    padding: 5px;
+    background-color: #9999FF;
+    color: #fff;
+  }
+  tr:hover { background-color: #E0E0FF; }
+</style>
+<h1 align="center">Works log</h1>
+<a class="btn btn-primary " href="/addjob">Add a job</a>
+<a class="btn btn-primary " href="/departments">go to departments</a>
+{% for item in jobs%}
+    <h1>Action # {{ loop.index }}</h1>
+    <table>
+    <thead><tr><th>Title of activity</th><th>Team leader</th><th>Duration</th><th>List of contributors</th><th>is finished</th></tr></thead>
+    <tbody>
+    <tr><td>{{ item.job }}</td><td>{{ item.team_leader }}</td><td>{{ item.work_size }}</td><td>{{ item.collaborators }}</td><td>{{ item.is_finished }}</td></tr>
+    </tbody>
+    </table>
+    {% if current_user.is_authenticated %}
+        <div>
+            <a href="/jobs/{{ item.id }}" class="btn btn-warning">Изменить</a>
+            <a href="/jobs/{{ item.id }}/remove" class="btn btn-danger">Удалить</a>
+        </div>
+    {% endif %}
+{% endfor %}
+{% endblock %}
